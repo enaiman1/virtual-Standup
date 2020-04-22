@@ -5,11 +5,13 @@ const morgan = require('morgan') //logger
 const bodyParser = require('body-parser')
 const cors = require('cors')
 
+// Creating express app
+const app = express()
+
 // Setting up PORT
 app.set('port', (process.env.PORT || 8081))
 
-// Creating express app and configuring middleware needed for authentication
-const app = express()
+//   configuring middleware
 app.use(bodyParser.json())
 app.use(bodyParser.urlencoded({ extended: false }))
 app.use(cors())
