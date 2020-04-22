@@ -5,3 +5,4 @@ const projectSchema = new mongoose.schema({
     description: { type: String },
     isActive: { type: Boolean, default: true }
 })
+module.exports = mongoose.model('Project', projectSchema)

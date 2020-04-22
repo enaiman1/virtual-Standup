@@ -28,7 +28,23 @@ app.use(function (req, res){
     res.json(err)
 })
 
-app.listen(app.get('port'), function () {
-	console.log(`==> 🌎  Listening on port: ${app.get('port')}!`)
+
+//Mongo DB connection
+const mongoose = require('mongoose')
+mongoose.connect('mongodb://localhost:27017/virtualstandups', {useNewUrlParser: true})
+
+const db= mongoose.connection
+// lets us know if we have any connection issues
+db.on('error', console.error.bind(console, 'connection error:'))
+
+/* this will let us know we are connected to Mongo Db and then 
+have express listen for the request on the configured port
+*/
+db.once('open', function(){
+    console.log('Connected to MongoDB')
+
+    app.listen(app.get('port'), function () {
+        console.log(`==> 🌎  Listening on port: ${app.get('port')}!`)
+    })
 })
 
